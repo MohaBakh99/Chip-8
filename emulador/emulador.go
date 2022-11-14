@@ -1,0 +1,99 @@
+package emulador
+
+import (
+  "fmt"
+  "log"
+  "io/ioutil"
+)
+
+type machine struct {
+  mem [4096]uint8
+
+  v [16]uint8
+  i uint16
+  pc uint16
+
+  st uint8
+  dt uint8
+
+  sp uint8
+  stack [16]uint16
+
+  display [32][64]uint8
+  keys [16]uint8
+}
+
+func (m *machine) load(f string) error {
+
+  p, err := ioutil.ReadFile(f)
+  if err != nil {
+    log.Fatal(err)
+  }
+
+  for i := 0; i < len(p); i++ {
+    m.mem[i+512] = p[i]
+    fmt.Printf("%x \n", p[i])
+  }
+
+  return nil
+}
+
+/*var sprites []uint8{
+  0xF0, 0x90, 0x90, 0x90, 0xF0, //[0]
+  0x20, 0x60, 0x20, 0x20, 0x70, //[1]
+  0xF0, 0x10, 0xF0, 0x80, 0xF0, //[2]
+  0xF0, 0x10, 0xF0, 0x10, 0xF0, //[3]
+  0x90, 0x90, 0xF0, 0x10, 0x10, //[4]
+  0xF0, 0x80, 0xF0, 0x10, 0xF0, //[5]
+  0xF0, 0x80, 0xF0, 0x90, 0xF0, //[6]
+  0xF0, 0x10, 0x20, 0x40, 0x40, //[7]
+  0xF0, 0x90, 0xF0, 0x90, 0xF0, //[8]
+  0xF0, 0x90, 0xF0, 0x10, 0xF0, //[9]
+  0xF0, 0x90, 0xF0, 0x90, 0x90, //[A]
+  0xE0, 0x90, 0xE0, 0x90, 0xE0, //[B]
+  0xF0, 0x80, 0x80, 0x80, 0xF0, //[C]
+  0xE0, 0x90, 0x90, 0x90, 0xE0, //[D]
+  0xF0, 0x80, 0xF0, 0x80, 0xF0, //[E]
+  0xF0, 0x80, 0xF0, 0x80, 0x80, //[F]
+}*/
+
+/*func init() machine {
+  im = machine{
+    pc: 0x200,
+  }
+  
+  //for i := 0; i <= len(sprites)-1; i++ {
+  //  im.mem[i] = sprites[i]
+  //}
+
+  for i := 512; i < 4096; i++ {
+	  im.mem[i] = 0x00
+  }
+
+  for i := 0; i < 16; i++ {
+	  im.stack[i] = 0
+	  im.v[i] = 0
+  }
+  
+  return im
+}*/
+
+func (m *machine) run() error {
+  x := 0x0FF
+  switch x {
+    case 0: break
+    case 1: break
+    default:
+      break
+  }
+  
+  if m.st > 0 {
+    m.st -=1
+  }
+  
+  if m.dt > 0 {
+    m.dt -=1
+  }
+
+  return nil
+}
